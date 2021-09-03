@@ -27,10 +27,10 @@ router.post("/user", async (req, res) => {
   console.log("Creating User");
   console.log(req.body.name);
 
-  const newUser = await new User({
+  const newUser = await User.create({
     name: req.body.name,
     lastName: req.body.lastName,
-  }).save();
+  });
 
   try {
     return res.json(newUser);
@@ -54,13 +54,13 @@ router.put("/user/:id", async (req, res) => {
 });
 
 //DELETE
-router.delete('/user/:id', async (req, res) => {
- const deleteUser = await User.findByIdAndDelete(req.params.id)
- try {
-  return res.json(deleteUser)
- } catch (error) {
-  return res.json(error)
- }
-})
+router.delete("/user/:id", async (req, res) => {
+  const deleteUser = await User.findByIdAndDelete(req.params.id);
+  try {
+    return res.json({ success: "User was deleted!" });
+  } catch (error) {
+    return res.json(error);
+  }
+});
 
 module.exports = router;

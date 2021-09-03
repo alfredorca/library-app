@@ -24,12 +24,12 @@ router.get('/book/:id', async (req, res) => {
 
 //POST single book
 router.post('/book', async (req, res) => {
- const newBook = await new Book({
+ const newBook = await Book.create({
   title: req.body.title,
   author: req.body.author,
   numberOfPages: req.body.numberOfPages,
   genre: req.body.genre
- }).save()
+ })
  
  try {
   return res.json(newBook) 
